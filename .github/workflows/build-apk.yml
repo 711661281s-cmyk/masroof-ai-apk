@@ -25,6 +25,17 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Prepare web assets
+        run: |
+          mkdir -p www
+          if [ -f "index.html" ]; then
+            cp index.html www/index.html
+          elif [ -f "ai_studio_code.html" ]; then
+            cp ai_studio_code.html www/index.html
+          elif [ -f "ai.html" ]; then
+            cp ai.html www/index.html
+          fi
+
       - name: Add Android platform if missing
         run: |
           if [ ! -d "android" ]; then
